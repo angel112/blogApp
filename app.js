@@ -17,18 +17,17 @@ var blogSchema = new mongoose.Schema({
     created: {type: Date, default: Date.now}
 });
 var Blog = mongoose.model("Blog", blogSchema);
-
-Blog.create({
-    title: "First Blog",
-    image: "https://scatter.co.in/wp-content/uploads/2018/01/shutterstock_720876373.jpg",
-    body: "I started making a blog App today!!" 
-})
-
 //RESTful ROUTES
 
 app.get("/blogs", function(req,res){
-
-})
+    Blog.find({}, function(err, foundBlogs){
+        if(err){
+            console.log(err);
+        }else{
+            res.render("index", {blogs: foundBlogs});
+        }
+    });
+});
 
 app.listen(3000, function(){
     console.log("Server has started");

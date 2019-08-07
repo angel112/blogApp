@@ -3,7 +3,7 @@
 <h1>Index Page</h1>
 
 <% blogs.forEach(function(blog){ %>
-    <div>
+    <div class="ui raised very padded text container segment">
         <h2><%=blog.title%></h2>
         <img src="<%= blog.image %>">
         <span><%= blog.created %></span>

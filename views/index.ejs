@@ -1,16 +1,41 @@
 <% include ./partials/header %>
 
-<h1>Index Page</h1>
-
-<% blogs.forEach(function(blog){ %>
-    <div class="ui raised very padded text container segment">
-        <h2><%=blog.title%></h2>
-        <img src="<%= blog.image %>">
-        <span><%= blog.created %></span>
-        <p><%= blog.body.subString(0,50) + "..." %></p>
-        <a href="/blogs/<%= blog._id %>">Read more..</a>
+<div class="ui main text container">
+    <div class="ui huge header">RESTful Blog App</div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% blogs.forEach(function(blog){ %>
+                <div class="item">
+                    <div class="image">
+                        <img class="ui centered round image" src="<%= blog.image %>">
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blogs/<%= blog._id %>"><%= blog.title %></a>
+                        <div class="meta">
+                            <span><%= blog.created.toDateString() %></span>
+                        </div>
+                        
+                        <div class="description">
+                        <p>
+                            <% if(blog.body.length<50){  %>
+                                <%- blog.body %>
+                            <% }else{ %>
+                                <%- blog.body.substring(0,50) %>...
+                            <% } %>
+                        </p>
+                        </div>
+                        <div class="extra">
+                            <a class="ui basic floated violet button" href="/blogs/<%= blog._id %>">Read more..<i class="chevron right icon"></i></a>
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+            <% }); %>        
+        </div>
     </div>
-<% }); %>
-
+</div>
 
 <% include ./partials/footer %>
